@@ -1,0 +1,21 @@
+﻿services:
+  mfapp:
+    image: mfapp
+    build:
+      context: .
+      dockerfile: MF/MFApp/Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=mf;User=sa;Password=Pass@word123;TrustServerCertificate=true;
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "8080:80"
+    depends_on: 
+      - sql-server-db
+  sql-server-db:
+    container_name: db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Pass@word123"
+      ACCEPT_EULA: "Y"       

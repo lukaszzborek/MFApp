@@ -1,0 +1,86 @@
+﻿@page "/MF"
+<h3>MF</h3>
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <h1>@ErrorMessage</h1>
+}
+
+<EditForm Model="@NipSearch">
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <InputText @bind-Value="NipSearch.Nip" class="form-control" id="Nip"/>
+    </div>
+    <div class="form-group">
+        <label for="Age">Age</label>
+        <InputDate @bind-Value="NipSearch.Date" class="form-control" id="Date"/>
+    </div>
+    <button class="btn btn-primary" @onclick="SearchButtonClicked">Search</button>
+</EditForm>
+
+
+@if (NipData != null)
+{
+    <table>
+        <tr>
+            <td>NIP</td><td>@NipData.Nip</td>
+        </tr>
+        <tr>
+            <td>Krs</td><td>@NipData.Krs</td>
+        </tr>
+        <tr>
+            <td>Regon</td><td>@NipData.Regon</td>
+        </tr>
+        <tr>
+            <td>Pesel</td><td>@NipData.Pesel</td>
+        </tr>
+        <tr>
+            <td>Restoration Date</td>
+            <td>
+                @{ if (NipData.RestorationDate.HasValue) NipData.RestorationDate.Value.ToString("YYYY-MM-dd"); }
+            </td>
+        </tr>
+        <tr>
+            <td>Working Address</td><td>@NipData.WorkingAddress</td>
+        </tr>
+        <tr>
+            <td>Virtual Accounts</td><td>@NipData.HasVirtualAccounts.ToString()</td>
+        </tr>
+        <tr>
+            <td>Status Vat</td><td>@NipData.StatusVat</td>
+        </tr>
+        <tr>
+            <td>Restoration Basis</td><td>@NipData.RestorationBasis</td>
+        </tr>
+        <tr>
+            <td>Registration Denial Basis</td><td>@NipData.RegistrationDenialBasis</td>
+        </tr>
+        <tr>
+            <td>Removal Date</td>
+            <td>
+                @{ if (NipData.RemovalDate.HasValue) NipData.RemovalDate.Value.ToString("YYYY-MM-dd"); }
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td><td>@NipData.Name</td>
+        </tr>
+        <tr>
+            <td>Registration Legal Date</td>
+            <td>
+                @{ if (NipData.RegistrationLegalDate.HasValue) NipData.RegistrationLegalDate.Value.ToString("YYYY-MM-dd"); }
+            </td>
+        </tr>
+        <tr>
+            <td>Removal Basis</td><td>@NipData.RemovalBasis</td>
+        </tr>
+        <tr>
+            <td>Residence Address</td><td>@NipData.ResidenceAddress</td>
+        </tr>
+        <tr>
+            <td>Registration Denial Date</td>
+            <td>
+                @{ if (NipData.RegistrationDenialDate.HasValue) NipData.RegistrationDenialDate.Value.ToString("YYYY-MM-dd"); }
+            </td>
+        </tr>
+    </table>
+}
